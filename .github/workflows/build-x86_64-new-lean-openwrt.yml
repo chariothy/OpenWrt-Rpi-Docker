@@ -10,7 +10,7 @@ name: Build x86_64 Lean's OpenWrt
 
 on:
   repository_dispatch:
-    types: [x86_64, x86]
+    types: [x86_64]
   workflow_dispatch:
   schedule:
     - cron: 0 0 * * *
@@ -26,7 +26,7 @@ env:
   IPV6MOD_IN_FIRMWARE: false
   KMODS_IN_FIRMWARE: false
   UPLOAD_WETRANSFER: true
-  UPLOAD_COWTRANSFER: true
+  UPLOAD_COWTRANSFER: false
   TZ: Asia/Shanghai
 
 jobs:
@@ -146,19 +146,6 @@ jobs:
           make target/install -j$(nproc) || make target/install -j1 V=s
           make checksum
           echo "::set-output name=status::success"
-
-      - name: Build & Push Docker Image To Dockerhub
-        run: |
-          cd openwrt/bin/targets/$TARGET/$SUBTARGET/
-          docker import $DEVICE-generic-rootfs.tar.gz ${{ secrets.DOCKER_HUB_USERNAME }}/openwrt:x86_64
-          docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PWD }}
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/openwrt:x86_64
-
-      - name: Push Docker Image To Aliyun Docker Registry
-        run: |
-          docker login -u ${{ secrets.ALIYUN_USERNAME }} -p ${{ secrets.ALIYUN_PWD }} registry.cn-shanghai.aliyuncs.com
-          docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/openwrt:x86_64 registry.cn-shanghai.aliyuncs.com/${{ secrets.ALIYUN_NAMESPACES }}/openwrt:x86_64
-          docker push registry.cn-shanghai.aliyuncs.com/${{ secrets.ALIYUN_NAMESPACES }}/openwrt:x86_64
 
       - name: Organize Files
         id: organize
