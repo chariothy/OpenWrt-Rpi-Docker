@@ -151,8 +151,8 @@ jobs:
         run: |
           cd openwrt/bin/targets/$TARGET/$SUBTARGET/
           docker import $DEVICE-generic-rootfs.tar.gz ${{ secrets.DOCKER_USER }}/openwrt-slim:x86_64
-          docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PWD }}
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/openwrt-slim:x86_64
+          echo "${{ secrets.DOCKER_PWD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+          docker push ${{ secrets.DOCKER_USER }}/openwrt-slim:x86_64
           
       - name: Organize Files
         id: organize
