@@ -5,6 +5,8 @@
 [![Docker Stars](https://img.shields.io/docker/stars/sulinggg/openwrt.svg?style=flat-square&label=Stars&logo=docker)](https://hub.docker.com/r/sulinggg/openwrt)
 [![Docker Pulls](https://img.shields.io/docker/pulls/sulinggg/openwrt.svg?style=flat-square&label=Pulls&logo=docker&color=orange)](https://hub.docker.com/r/sulinggg/openwrt)
 
+**(本项目为fork项目，旨在增加vmware格式镜像，并推送到奶牛快传，不再推送到docker，如需docker镜像请见原项目，以下为原项目内容)**
+
 本项目旨在构建适用于树莓派 1~4 与 x86_64 平台的 OpenWrt 镜像 (每日更新)。
 
 Github: <https://github.com/SuLingGG/OpenWrt-Rpi-Docker>
