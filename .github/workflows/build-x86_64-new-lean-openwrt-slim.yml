@@ -26,7 +26,7 @@ env:
   IPV6MOD_IN_FIRMWARE: false
   KMODS_IN_FIRMWARE: false
   UPLOAD_WETRANSFER: true
-  UPLOAD_COWTRANSFER: true
+  UPLOAD_COWTRANSFER: false
   TZ: Asia/Shanghai
 
 jobs:
